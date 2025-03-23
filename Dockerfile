@@ -7,7 +7,7 @@ FROM oven/bun:latest as builder
 WORKDIR /app
 
 # 패키지 파일 복사 후 의존성 설치
-COPY package.json bun.lockb ./
+COPY package.json bun.lock ./
 RUN bun install
 
 # 앱 소스 전체 복사
