@@ -26,6 +26,7 @@ WORKDIR /app
 
 # 빌드 결과물과 의존성만 복사
 COPY --from=builder /app/server ./server
+COPY --from=builder /app/package.json ./package.json
 
 EXPOSE 8000
 
