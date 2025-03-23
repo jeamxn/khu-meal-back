@@ -22,7 +22,10 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const app = new Elysia();
 
-app.use(swagger());
+if (Bun.env.NODE_ENV === "development") { 
+  app.use(swagger());
+}
+
 app.use(
   cors({
     origin: true,

@@ -1,4 +1,4 @@
-import mongoose, { type Document, type ObjectId } from "mongoose";
+import mongoose, { type Document, ObjectId } from "mongoose";
 
 interface DCourse {
   restaurant: ObjectId;

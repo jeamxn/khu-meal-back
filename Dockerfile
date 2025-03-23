@@ -1,24 +1,6 @@
 # syntax=docker/dockerfile:1.2
 
 ###############################
-# 1단계: 빌드 스테이지
-###############################
-FROM oven/bun:latest as builder
-WORKDIR /app
-
-# 패키지 파일 복사 후 의존성 설치
-COPY package.json bun.lock ./
-RUN bun install
-
-# 앱 소스 전체 복사
-COPY . .
-
-# 환경변수 파일을 BuildKit 시크릿으로 받아서 주입 후 빌드
-RUN --mount=type=secret,id=env \
-  export $(cat /run/secrets/env | grep -v '^#' | xargs) && \
-  bun run build
-
-###############################
 # 2단계: 실행 스테이지
 ###############################
 FROM oven/bun:latest as runner

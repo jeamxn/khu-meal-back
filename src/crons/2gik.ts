@@ -16,7 +16,7 @@ const run: CronConfig["run"] = async () => {
   
   const menus = response.data.root[0].WEEKLYMENU[0];
   const datas = [];
-  
+
   for (let i = 1; i <= 7; i++) {
     datas.push(
       dataDB.updateOne(
