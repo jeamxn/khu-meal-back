@@ -1,11 +1,13 @@
 import Elysia from "elysia";
 
-import get from "./get";
+import info from "./info";
+import meal from "./meal";
 
 const MealRouter = new Elysia({
   name: "Meal Router",
   prefix: "meal",
 })
-  .use(get);
+  .use(meal)
+  .use(info);
 
 export default MealRouter;

@@ -1,7 +1,8 @@
 import cron, { CronConfig, Patterns } from "@elysiajs/cron";
 import axios from "axios";
+import mongoose from "mongoose";
 
-import { dataDB } from "@/models/meal";
+import { dataDB } from "@/models/data";
 
 const run: CronConfig["run"] = async () => { 
   const response = await axios.post(
@@ -20,48 +21,30 @@ const run: CronConfig["run"] = async () => {
     datas.push(
       dataDB.updateOne(
         { 
-          type: "2gik",
+          course: new mongoose.Types.ObjectId("67df8f651ebc907021326750"),
           date: menus[`fo_date${i}`],
-          start: "07:00",
-          end: "09:00",
         },
         {
-          type: "2gik",
-          date: menus[`fo_date${i}`],
-          start: "07:00",
-          end: "09:00",
           menu: menus[`fo_menu_mor${i}`].split(", "),
         },
         { upsert: true }
       ),
       dataDB.updateOne(
         { 
-          type: "2gik",
+          course: new mongoose.Types.ObjectId("67df90831ebc907021326755"),
           date: menus[`fo_date${i}`],
-          start: "11:30",
-          end: "13:30",
         },
         {
-          type: "2gik",
-          date: menus[`fo_date${i}`],
-          start: "11:30",
-          end: "13:30",
           menu: menus[`fo_menu_lun${i}`].split(", "),
         },
         { upsert: true }
       ),
       dataDB.updateOne(
         { 
-          type: "2gik",
+          course: new mongoose.Types.ObjectId("67df908b1ebc907021326756"),
           date: menus[`fo_date${i}`],
-          start: "17:00",
-          end: "18:30",
         },
         {
-          type: "2gik",
-          date: menus[`fo_date${i}`],
-          start: "17:00",
-          end: "18:30",
           menu: menus[`fo_menu_eve${i}`].split(", "),
         },
         { upsert: true }
@@ -70,6 +53,8 @@ const run: CronConfig["run"] = async () => {
   }
 
   await Promise.all(datas);
+
+  console.log("💩 2gik done");
 };
 
 const Cron_2Gik = cron({

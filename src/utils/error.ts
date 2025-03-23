@@ -9,6 +9,8 @@ export const ERROR_MESSAGE = {
   INVALID_TOKEN: [401, "유효하지 않은 토큰입니다."],
   UNAUTHORIZED: [401, "인증되지 않은 사용자입니다."],
   NO_REFRESH_TOKEN: [401, "리프레시 토큰이 없습니다."],
+
+  NOT_FOUNDED_KEY: [404, "찾을 수 없는 식당입니다."],
 } as const;
 
 export type ERROR_MESSAGE_TYPE = typeof ERROR_MESSAGE;
