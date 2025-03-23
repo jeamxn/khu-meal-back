@@ -48,22 +48,29 @@ const meal = new Elysia().use(getRestaurant).get(
       },
     ]);
 
-    const timeFilter = (criteria: string) =>
-      data.filter((v) => {
-        const start = dayjs(v.course.start, "HH:mm");
-        const end = dayjs(v.course.end, "HH:mm");
-        const include = dayjs(criteria, "HH:mm");
-        return (start.isBefore(include) && end.isAfter(include)) || start.isSame(include) || end.isSame(include);
-      }).map((v) => ({
-        title: v.course.title,
-        menu: v.menu,
-        time: `${v.course.start} ~ ${v.course.end}`,
-      }));
+    const mapper = (v: any) => ({
+      title: v.course.title,
+      menu: v.menu,
+      time: `${v.course.start} ~ ${v.course.end}`,
+    });
 
     const result = {
-      breakfast: timeFilter("07:00"),
-      lunch: timeFilter("12:00"),
-      dinner: timeFilter("18:00"),
+      breakfast: data.filter((v) => {
+        const start = dayjs(v.course.start, "HH:mm");
+        const include = dayjs("11:00", "HH:mm");
+        return start.isBefore(include);
+      }).map(mapper),
+      lunch: data.filter((v) => {
+        const start = dayjs(v.course.start, "HH:mm");
+        const end = dayjs(v.course.end, "HH:mm");
+        const include = dayjs("12:00", "HH:mm");
+        return (start.isBefore(include) && end.isAfter(include)) || start.isSame(include) || end.isSame(include);
+      }).map(mapper),
+      dinner: data.filter((v) => {
+        const end = dayjs(v.course.end, "HH:mm");
+        const include = dayjs("14:00", "HH:mm");
+        return end.isAfter(include);
+      }).map(mapper),
     };
 
     return result;

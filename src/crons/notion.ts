@@ -6,7 +6,7 @@ import { dataDB } from "@/models/data";
 import { restaurantDB } from "@/models/restaurant";
 import { client, databases } from "@/utils/notion";
 
-const run = async () => {
+const run: CronConfig["run"] = async () => {
   // 식당 목록 동기화
   const restaurants_notion = await client.databases.query({
     database_id: databases.restaurant,
@@ -88,7 +88,6 @@ const run = async () => {
   });
   console.log("🐩 Notion done at:", dayjs().format("YYYY-MM-DD HH:mm:ss"));
 };
-run();
 
 const Cron_notion = cron({
   name: "cron_notion",

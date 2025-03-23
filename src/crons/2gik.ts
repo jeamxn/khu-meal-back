@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 import { dataDB } from "@/models/data";
 
-const run = async () => { 
+const run: CronConfig["run"] = async () => { 
   const response = await axios.post(
     "https://dorm2.khu.ac.kr/food/getWeeklyMenu.do",
     new URLSearchParams({
@@ -55,7 +55,6 @@ const run = async () => {
   await Promise.all(datas);
   console.log("💩 2gik done at:", dayjs().format("YYYY-MM-DD HH:mm:ss"));
 };
-run();
 
 const Cron_2Gik = cron({
   name: "cron_2gik",
