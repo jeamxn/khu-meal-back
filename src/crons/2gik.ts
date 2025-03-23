@@ -59,7 +59,7 @@ const run: CronConfig["run"] = async () => {
 
 const Cron_2Gik = cron({
   name: "2gik",
-  pattern: Patterns.EVERY_DAY_AT_10AM,
+  pattern: "0 0 * * *",
   run: run,
 });
 

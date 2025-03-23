@@ -1,6 +1,7 @@
 import Elysia from "elysia";
 
 import info from "./info";
+import list from "./list";
 import meal from "./meal";
 
 const MealRouter = new Elysia({
@@ -8,6 +9,7 @@ const MealRouter = new Elysia({
   prefix: "meal",
 })
   .use(meal)
-  .use(info);
+  .use(info)
+  .use(list);
 
 export default MealRouter;
