@@ -58,7 +58,7 @@ const run: CronConfig["run"] = async () => {
 
 const Cron_2Gik = cron({
   name: "cron_2gik",
-  pattern: Patterns.EVERY_12_HOURS,
+  pattern: Patterns.EVERY_30_MINUTES,
   run: run,
 });
 
