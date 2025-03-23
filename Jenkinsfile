@@ -33,6 +33,26 @@ pipeline {
             }
         }
 
+        stage('Build Image') {
+            steps {
+                script {
+                    docker.build(env.IMAGE_URL, "--secret id=env,src=${env.MOUNT_URL}/.env .")
+                }
+
+            }
+        }
+        
+        stage('Push Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://ghcr.io', 'ghcr') {
+                        docker.image(env.IMAGE_URL).push()
+                        docker.image(env.IMAGE_URL).push("latest")
+                    }
+                }
+            }
+        }
+
         stage('Remove Container') {
             steps {
                 script {
