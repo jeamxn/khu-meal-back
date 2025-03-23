@@ -91,7 +91,7 @@ const run: CronConfig["run"] = async () => {
 
 const Cron_notion = cron({
   name: "cron_notion",
-  pattern: Patterns.EVERY_10_HOURS,
+  pattern: Patterns.EVERY_30_MINUTES,
   run: run,
 });
 
