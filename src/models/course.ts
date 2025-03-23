@@ -1,6 +1,7 @@
 import mongoose, { type Document, ObjectId } from "mongoose";
 
 interface DCourse {
+  key: string;
   restaurant: ObjectId;
   title: string;
   start: string;
@@ -9,6 +10,7 @@ interface DCourse {
 type ICourse = Document<DCourse> & DCourse;
 
 const courseSchema = new mongoose.Schema({
+  key: String,
   restaurant: {
     type: mongoose.Types.ObjectId,
     ref: "restaurant",
