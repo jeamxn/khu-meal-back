@@ -50,11 +50,9 @@ const meal = new Elysia().use(getRestaurant).get(
 
     const timeFilter = (criteria: string) =>
       data.filter((v) => {
-        console.log("raw values:", v.course.start, v.course.end);
         const start = dayjs(v.course.start, "HH:mm");
         const end = dayjs(v.course.end, "HH:mm");
         const include = dayjs(criteria, "HH:mm");
-        console.log(start.format(), end.format(), include.format());
         return (start.isBefore(include) && end.isAfter(include)) || start.isSame(include) || end.isSame(include);
       }).map((v) => ({
         title: v.course.title,
