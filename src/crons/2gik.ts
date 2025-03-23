@@ -1,10 +1,11 @@
 import cron, { CronConfig, Patterns } from "@elysiajs/cron";
 import axios from "axios";
+import dayjs from "dayjs";
 import mongoose from "mongoose";
 
 import { dataDB } from "@/models/data";
 
-const run: CronConfig["run"] = async () => { 
+const run = async () => { 
   const response = await axios.post(
     "https://dorm2.khu.ac.kr/food/getWeeklyMenu.do",
     new URLSearchParams({
@@ -51,15 +52,14 @@ const run: CronConfig["run"] = async () => {
       ),
     );
   }
-
   await Promise.all(datas);
-
-  console.log("💩 2gik done");
+  console.log("💩 2gik done at:", dayjs().format("YYYY-MM-DD HH:mm:ss"));
 };
+run();
 
 const Cron_2Gik = cron({
-  name: "2gik",
-  pattern: "0 0 * * *",
+  name: "cron_2gik",
+  pattern: Patterns.EVERY_12_HOURS,
   run: run,
 });
 
