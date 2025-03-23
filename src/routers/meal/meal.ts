@@ -59,18 +59,18 @@ const meal = new Elysia().use(getRestaurant).get(
         const start = dayjs(v.course.start, "HH:mm");
         const include = dayjs("11:00", "HH:mm");
         return start.isBefore(include);
-      }).map(mapper),
+      }).map(mapper).sort((a, b) => a.title > b.title ? 1 : -1),
       lunch: data.filter((v) => {
         const start = dayjs(v.course.start, "HH:mm");
         const end = dayjs(v.course.end, "HH:mm");
         const include = dayjs("12:00", "HH:mm");
         return (start.isBefore(include) && end.isAfter(include)) || start.isSame(include) || end.isSame(include);
-      }).map(mapper),
+      }).map(mapper).sort((a, b) => a.title > b.title ? 1 : -1),
       dinner: data.filter((v) => {
         const end = dayjs(v.course.end, "HH:mm");
         const include = dayjs("14:00", "HH:mm");
         return end.isAfter(include);
-      }).map(mapper),
+      }).map(mapper).sort((a, b) => a.title > b.title ? 1 : -1),
     };
 
     return result;
