@@ -14,9 +14,9 @@ RUN bun install
 COPY . .
 
 # 환경변수 파일을 BuildKit 시크릿으로 받아서 주입 후 빌드
-RUN --mount=type=secret,id=env \
-  export $(cat /run/secrets/env | grep -v '^#' | xargs) && \
-  bun run build
+# RUN --mount=type=secret,id=env \
+#   export $(cat /run/secrets/env | grep -v '^#' | xargs) && \
+#   bun run build
 
 ###############################
 # 2단계: 실행 스테이지
