@@ -6,10 +6,21 @@
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/cors": "^1.2.0",
+    "@elysiajs/cron": "^1.2.0",
+    "@elysiajs/jwt": "^1.2.0",
+    "@elysiajs/swagger": "^1.2.2",
+    "axios": "^1.8.4",
+    "dayjs": "^1.11.13",
+    "elysia": "latest",
+    "jose": "^6.0.10",
+    "mongoose": "^8.12.2"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "eslint": "^8",
+    "eslint-config-next": "15.2.3",
+    "@eslint/eslintrc": "^3"
   },
   "module": "src/index.js"
 }
